@@ -35,6 +35,18 @@ namespace ShoppingList
             _ProductListContainers.Add(container);
         }
 
+        public ProductListContainer GetContainerWithID(int id)
+        {
+            foreach (var container in _ProductListContainers)
+            {
+                if (container.Get_ID() == id)
+                {
+                    return container;
+                }
+            }
+            return null;
+        }
+
         public static float GetTotalValueOfSpecificContainer(ProductListContainer container)
         {
             Console.WriteLine("Podaj ID kontenera:");
@@ -71,7 +83,7 @@ namespace ShoppingList
             return totalValue;
         }
 
-        public static void DisplayShoppingLists(List<ProductListContainer> containers)
+        public static void DisplayShoppingLists(ProductListContainer containers)
         {
             foreach (ProductListContainer container in _ProductListContainers)
             {
@@ -79,31 +91,31 @@ namespace ShoppingList
             }
         }
 
-        public static void SearchForSpecificList(List<ProductListContainer> containers)
-        {
-            Console.WriteLine("Podaj ID Listy:");
-            var id = Console.ReadLine();
-            int containerID;
-            if (int.TryParse(id, out containerID))
-            {
-                var selectedContainer = containers.FirstOrDefault(c => c.Get_ID() == containerID);
-                if (selectedContainer != null)
-                {
-                    List<Product> productList = selectedContainer.GetProductsList();
-                    ProductListContainer.Display(productList);
-                }
-                else
-                {
-                    Console.WriteLine("Nie znaleziono kontenera o podanym ID.");
-                    Console.ReadLine();
-                }
-            }
-            else
-            {
-                Console.WriteLine("Niepoprawne dane, proszę podać wartość liczbową.");
-                Console.ReadLine();
-            }
-        }
+        //public static void SearchForSpecificList(List<ProductListContainer> containers)
+        //{
+        //    Console.WriteLine("Podaj ID Listy:");
+        //    var id = Console.ReadLine();
+        //    int containerID;
+        //    if (int.TryParse(id, out containerID))
+        //    {
+        //        var selectedContainer;
+        //        if (selectedContainer != null)
+        //        {
+        //            List<Product> productList = selectedContainer.GetProductsList();
+        //            ProductListContainer.Display(productList);
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine("Nie znaleziono kontenera o podanym ID.");
+        //            Console.ReadLine();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("Niepoprawne dane, proszę podać wartość liczbową.");
+        //        Console.ReadLine();
+        //    }
+        //}
 
     }
 

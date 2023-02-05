@@ -43,23 +43,23 @@ namespace App
             }
         }
 
-        public static List<ProductListContainer> GetContainersFromFile()
+        public static ProductListContainer GetContainersFromFile()
         {
-            var container = new List<ProductListContainer>();
-            XmlSerializer serializer = new XmlSerializer(typeof(List<ProductListContainer>));
+            ProductListContainer containers = null;
+            XmlSerializer serializer = new XmlSerializer(typeof(ProductListContainer));
 
             try
             {
                 using (var reader = new StreamReader("ContainerManagerData.xml"))
                 {
-                    container = (List<ProductListContainer>)serializer.Deserialize(reader);
+                    containers = (ProductListContainer)serializer.Deserialize(reader);
                 }
             }
             catch (FileNotFoundException)
             {
                 Console.WriteLine("Plik nie został znaleziony.");
             }
-            return container;
+            return containers;
         }
 
 
@@ -75,13 +75,12 @@ namespace App
             string userInput = Console.ReadLine();
             while (userInput != "Koniec")
             {
-
+                Console.Clear();
                 switch (userInput)
                 {
                     case "Zakupy":
                         while (userInput != "Wróć")
                         {
-                            Console.Clear();
                             IDottable.Stars();
                             Console.WriteLine("Lista komend:  :Nowy: :Lista: :Wartość: :Zapisz: :Kasuj: :Wróć:");
                             IDottable.Stars();
@@ -108,10 +107,11 @@ namespace App
                                 case "Zapisz":
                                     Console.Clear();
                                     ProductListContainer Container = new ProductListContainer(productsList);
-                                    SaveContainerToFile(Container);
                                     ContainerManager.AddContainer(Container);
+                                    SaveContainerToFile(Container);
                                     SaveToManager(Container);
                                     productsList.Clear();
+                                    Console.Clear();
                                     Console.WriteLine("Lista zapisana!");
                                     IDottable.Stars();
                                     continue;
@@ -139,7 +139,6 @@ namespace App
                     case "Historia":
                         while (userInput != "Wróć")
                         {
-                            Console.Clear();
                             IDottable.Stars();
                             Console.WriteLine("Lista komend:  :Listy: :Szukaj: :Sortuj: :Usuń: :Wróć:");
                             IDottable.Stars();
@@ -148,15 +147,15 @@ namespace App
                             {
                                 case "Listy":
                                     Console.Clear();
-                                    List<ProductListContainer> containersDisplay = GetContainersFromFile();
+                                    ProductListContainer containersDisplay = GetContainersFromFile();
                                     ContainerManager.DisplayShoppingLists(containersDisplay);
                                     IDottable.Stars();
                                     continue;
 
                                 case "Szukaj":
                                     Console.Clear();
-                                    List<ProductListContainer> containersSearch = GetContainersFromFile();
-                                    ContainerManager.SearchForSpecificList(containersSearch);
+                                   // ProductListContainer containers = GetContainersFromFile();
+                                    //ContainerManager.SearchForSpecificList(containers);
                                     continue;
 
                                 case "Wróć":

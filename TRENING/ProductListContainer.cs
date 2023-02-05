@@ -1,10 +1,13 @@
 ﻿using App.Interfaces;
 using System.ComponentModel;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace App.Objects
 {
     [Serializable]
-  public class ProductListContainer
+    [XmlRoot("ProductListContainer", Namespace = "")]
+    public class ProductListContainer
     { private int _IDCounter = 0;
         private int _ID { get; set; }
         private string _Name { get; set; }
@@ -110,7 +113,6 @@ namespace App.Objects
             }
         }
 
-        
         public ProductListContainer()
         {
         }
