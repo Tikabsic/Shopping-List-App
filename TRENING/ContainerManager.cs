@@ -23,7 +23,7 @@ namespace ShoppingList
                     {
                         if (instance == null)
                         {
-                            instance = new ContainerManager();
+                            instance = ContainerManager;
                         }
                     }
                 }
