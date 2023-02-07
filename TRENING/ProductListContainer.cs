@@ -8,7 +8,9 @@ namespace App.Objects
     [Serializable]
     [XmlRoot("ProductListContainer", Namespace = "")]
     public class ProductListContainer
-    { private int _IDCounter = 0;
+    {
+        private static int _IDCounter = 0;
+
         private int _ID { get; set; }
         private string _Name { get; set; }
 
@@ -89,7 +91,7 @@ namespace App.Objects
             if (unnecessaryItems >= 1 && unnecessaryItems < 5)
             {
                 Console.WriteLine("Całkowita wartość niepotrzebnych przedmiotów: " + unnecessaryItems);
-                Console.WriteLine("********************************************");
+                IDottable.Stars();
                 foreach (Product Prod in ProductsList.Where(x => x.GetIsNecessary() == false))
                 {
                     Console.WriteLine($"{Prod.GetName()}, cena wynosi {Prod.GetPrice()}zł, ilość w koszyku:{Prod.GetIsNecessary()}");

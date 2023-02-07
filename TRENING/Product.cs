@@ -56,6 +56,10 @@ namespace App.Objects
         //Method to display every single item in shopping list
         public static void Display(List<Product> productsList)
         {
+            if (productsList == null)
+            {
+                Console.WriteLine("Lista jest pusta!");
+            }
             foreach (Product Prod in productsList.Where(x => x.IsNecessary == true))
             {
                 Console.WriteLine($"{Prod.Name}, cena wynosi {Prod.Price}zł, ilość w koszyku {Prod.Quantity}");

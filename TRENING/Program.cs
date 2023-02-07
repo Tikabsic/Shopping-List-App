@@ -1,8 +1,7 @@
 ﻿using App.Objects;
 using App.Interfaces;
-using ShoppingList;
 using System.Xml.Serialization;
-using System;
+
 
 namespace App
 {
@@ -25,7 +24,7 @@ namespace App
                 Console.WriteLine("Wystąpił błąd podczas zapisywania danych do pliku. Błąd: " + ex.Message);
             }
         }
-        
+
         public static void SaveToManager(ProductListContainer container)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(ProductListContainer));
@@ -43,29 +42,28 @@ namespace App
             }
         }
 
-        public static ProductListContainer GetContainersFromFile()
+        public static ContainerManager GetContainersFromFile()
         {
-            ProductListContainer containers = null;
-            XmlSerializer serializer = new XmlSerializer(typeof(ProductListContainer));
-
+            ContainerManager containersManager = ContainerManager.Instance;
             try
             {
                 using (var reader = new StreamReader("ContainerManagerData.xml"))
                 {
-                    containers = (ProductListContainer)serializer.Deserialize(reader);
+                    XmlSerializer serializer = new XmlSerializer(typeof(ContainerManager));
+                    containersManager = (ContainerManager)serializer.Deserialize(reader);
                 }
             }
-            catch (FileNotFoundException)
+            catch (Exception ex)
             {
-                Console.WriteLine("Plik nie został znaleziony.");
+                Console.WriteLine("Wystąpił błąd podczas wczytywania danych z pliku. Błąd: " + ex.Message);
             }
-            return containers;
+            return containersManager;
         }
 
 
         static void Main(string[] args)
         {
-            ContainerManager ContainerManager = ContainerManager.Instance;
+            ContainerManager containerManager = GetContainersFromFile();
             List<Product> productsList = new List<Product>();
 
             IDottable.Stars();
@@ -147,15 +145,13 @@ namespace App
                             {
                                 case "Listy":
                                     Console.Clear();
-                                    ProductListContainer containersDisplay = GetContainersFromFile();
-                                    ContainerManager.DisplayShoppingLists(containersDisplay);
+                                    ContainerManager.DisplayShoppingLists();
                                     IDottable.Stars();
                                     continue;
 
                                 case "Szukaj":
                                     Console.Clear();
-                                   // ProductListContainer containers = GetContainersFromFile();
-                                    //ContainerManager.SearchForSpecificList(containers);
+                                    ContainerManager.SearchForSpecificList(containerManager);
                                     continue;
 
                                 case "Wróć":
