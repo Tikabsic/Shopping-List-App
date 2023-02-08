@@ -70,12 +70,12 @@ namespace App.Objects
         {
             foreach (Product Prod in ProductsList.Where(x => x.GetIsNecessary() == true))
             {
-                Console.WriteLine($"{Prod.GetName()}, cena wynosi {Prod.GetPrice()}zł, ilość w koszyku {Prod.GetIsNecessary()}");
+                Console.WriteLine($"{Prod.Name}, cena wynosi {Prod.GetPrice()}zł, ilość w koszyku {Prod.GetIsNecessary()}");
                 IDottable.Stars();
             }
             foreach (Product Prod in ProductsList.Where(x => x.GetIsNecessary() == false))
             {
-                Console.WriteLine($"{Prod.GetName()}, cena wynosi {Prod.GetPrice()}zł, ilość w koszyku {Prod.GetIsNecessary()}");
+                Console.WriteLine($"{Prod.Name}, cena wynosi {Prod.GetPrice()}zł, ilość w koszyku {Prod.GetIsNecessary()}");
                 IDottable.Stars();
             }
             //Counting all unnecessary items with IsNecessary flag False
@@ -94,7 +94,7 @@ namespace App.Objects
                 IDottable.Stars();
                 foreach (Product Prod in ProductsList.Where(x => x.GetIsNecessary() == false))
                 {
-                    Console.WriteLine($"{Prod.GetName()}, cena wynosi {Prod.GetPrice()}zł, ilość w koszyku:{Prod.GetIsNecessary()}");
+                    Console.WriteLine($"{Prod.Name}, cena wynosi {Prod.GetPrice()}zł, ilość w koszyku:{Prod.GetIsNecessary()}");
                     IDottable.Stars();
                 }
             }
@@ -104,7 +104,7 @@ namespace App.Objects
                 IDottable.Stars();
                 foreach (Product Prod in ProductsList.Where(x => x.GetIsNecessary() == false))
                 {
-                    Console.WriteLine($"{Prod.GetName()} , cena wynosi  {Prod.GetPrice()}zł, ilość w koszyku:{Prod.GetIsNecessary()}");
+                    Console.WriteLine($"{Prod.Name} , cena wynosi  {Prod.GetPrice()}zł, ilość w koszyku:{Prod.GetIsNecessary()}");
                     IDottable.Stars();
                 }
             }

@@ -7,16 +7,13 @@ namespace App.Objects
     {
         //Product properties
         private int ID { get; set; }
-        private string Name { get; set; }
+        public string Name { get; private set; }
         private float Price { get; set; }
         private float Quantity { get; set; }
         private bool IsNecessary { get; set; }
 
 
-        public string GetName()
-        {
-            return Name;
-        }
+
         public float GetPrice()
         {
             return Price;
